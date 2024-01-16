@@ -27,6 +27,9 @@
     background-color: white;
     box-shadow: 3px 4px 36px -6px rgba(0,0,0,0.4);
     border-radius: 50px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .left {
@@ -113,6 +116,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    flex-direction: row;
 }
 
 .google_btn > img{

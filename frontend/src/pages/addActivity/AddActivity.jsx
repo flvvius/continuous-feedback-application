@@ -2,6 +2,9 @@ import { useState } from "react";
 import styles from "./styles.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { toast, ToastContainer } from "react-toastify";
+
 
 const AddActivity = () => {
     const [startDate, setStartDate] = useState(new Date());
@@ -32,18 +35,46 @@ const AddActivity = () => {
     });
 
     // console.log(startDate)
-    console.log(formattedStartDateTime, formattedEndDateTime);
+    // console.log(formattedStartDateTime, formattedEndDateTime);
 
-    const handleClick = () => {
+    const handleClick = async () => {
+
         const activity = {
             date: formattedStartDateTime,
             description: description,
             accessCode: accessCode,
             expirationDate: formattedEndDateTime
         }
+        
+        axios.post("http://localhost:1235/api/activity", activity)
+        .then((res) => {
+            console.log(res.status)
+            toast.success("Activity added!", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
+          })
+          .catch((er) => {
+            toast.error(er.response.data, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+            console.log(er.response.data)
+          });
+        // .then((res) => alert(res)).catch((err) => alert(err));
 
-        const response = axios.post("http://localhost:1235/api/activity", activity);
-        console.log(response);
     }
 
     const goBack = () => {
@@ -52,23 +83,41 @@ const AddActivity = () => {
 
     return (
         <>
-            <form> 
-                <label htmlFor="date">Activity start date:</label>
-                <input type="datetime-local" name="date" id="date" onChange={(e) => setStartDate(e.target.value)} />
+            <form className={styles.form_container}>
+                <div className={styles.div}>
+                    <label htmlFor="date">Activity start date:</label>
+                    <input type="datetime-local" name="date" id="date" onChange={(e) => setStartDate(e.target.value)} />
+                </div>
+                <div className={styles.div}>
+                    <label htmlFor="description">Description of the activity:</label>
+                    <input type="text" name="description" id="description" onChange={(e) => setDescription(e.target.value)} />
+                </div>
+                <div className={styles.div}>
+                    <label htmlFor="accessCode">Access code:</label>
+                    <input type="number" name="accessCode" id="accessCode" onChange={(e) => setAccessCode(e.target.value)} />
+                </div>
+                <div className={styles.div}>
+                    <label htmlFor="endDate">Activity expiration date:</label>
+                    <input type="datetime-local" name="endDate" id="endDate" onChange={(e) => setEndDate(e.target.value)} />
+                </div>
 
-                <label htmlFor="description">Description of the activity:</label>
-                <input type="text" name="description" id="description" onChange={(e) => setDescription(e.target.value)} />
-
-                <label htmlFor="accessCode">Access code:</label>
-                <input type="number" name="accessCode" id="accessCode" onChange={(e) => setAccessCode(e.target.value)} />
-
-                <label htmlFor="endDate">Activity expiration date:</label>
-                <input type="datetime-local" name="endDate" id="endDate" onChange={(e) => setEndDate(e.target.value)} />
-
-                <button onClick={handleClick}>Add activity</button>
             </form>
+            <button onClick={handleClick} className={styles.btn}>Add activity</button>
 
-            <button onClick={goBack}>Go back</button>
+            <button onClick={goBack} className={styles.btn}>Go back</button>
+
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
         </>
     )
 }

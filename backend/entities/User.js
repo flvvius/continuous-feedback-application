@@ -23,10 +23,6 @@ const User = db.define("User", {
             isEmail: true
         }
     },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     isTeacher: {
         type: DataTypes.BOOLEAN,
         allowNull: false

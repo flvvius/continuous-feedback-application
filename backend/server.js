@@ -53,7 +53,6 @@ app.use(passport.authenticate("session"));
 
 dbInit();
 
-console.log('ceva');
 
 // app.use(cors( {
 //     origin: "http://localhost:1235",
@@ -72,11 +71,11 @@ app.get("/reset", async (req, res) => {
     }
 })
 
-app.use("/api", activityRouter);
-app.use("/api", feedbackRouter);
-app.use("/api", userRouter);
-app.use("/api", userActivityRouter);
-app.use("/api", authRouter);
+// app.use("/api", activityRouter);
+// app.use("/api", feedbackRouter);
+// app.use("/api", userRouter);
+// app.use("/api", userActivityRouter);
+// app.use("/api", authRouter);
 
 app.use("/", (req, res) => {
     res.status(200).send("Server ON!");

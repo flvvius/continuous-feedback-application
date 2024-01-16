@@ -31,7 +31,19 @@ const Activity = (props) => {
         second: '2-digit',
       });;
 
+      const date = new Date();
+
     return (
+        (new Date(date2)).getTime() < date.getTime() ? 
+        <div className={styles.activity}>
+            <button onClick={() => handleClick(props.act.id)} className={styles.exp} >
+                <p>Description: {props.act.description}</p>
+                <p>Start date: {date1}</p>
+                <p>Expiration date: {date2}</p>
+                <p>Access code: {props.act.accessCode}</p>
+            </button>
+        </div>
+        :
         <div className={styles.activity}>
             <button onClick={() => handleClick(props.act.id)} >
                 <p>Description: {props.act.description}</p>

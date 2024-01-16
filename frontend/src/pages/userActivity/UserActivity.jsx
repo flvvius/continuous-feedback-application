@@ -2,6 +2,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const UserActivity = () => {
 
@@ -19,6 +21,19 @@ const UserActivity = () => {
         getActivity();
     }, []);
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (new Date(activity.expirationDate).getTime() < new Date().getTime()) {
+                navigate("/home")
+            }
+        }, 5000)
+
+        return () => {
+            clearInterval(interval);
+        }
+    }, [activity])
+    
+
     const goBack = () => {
         navigate("/home")
     }
@@ -29,7 +44,33 @@ const UserActivity = () => {
             type: "smiley",
             activityId: activity.id
         }
-        await axios.post("http://localhost:1235/api/feedback", feedback);
+        await axios.post("http://localhost:1235/api/feedback", feedback)
+        .then((res) => {
+            console.log(res.status)
+            toast.success("Feedback sent!", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
+          })
+          .catch((er) => {
+            toast.error("Sorry, but there was an error, please try again", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+            console.log(er)
+          });
     }
 
     const handleFrowny = async () => {
@@ -38,7 +79,33 @@ const UserActivity = () => {
             type: "frowny",
             activityId: activity.id
         }
-        await axios.post("http://localhost:1235/api/feedback", feedback);
+        await axios.post("http://localhost:1235/api/feedback", feedback)
+        .then((res) => {
+            console.log(res.status)
+            toast.success("Feedback sent!", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
+          })
+          .catch((er) => {
+            toast.error("Sorry, but there was an error, please try again", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+            console.log(er)
+          });
     }
 
     const handleSurprised = async () => {
@@ -47,7 +114,33 @@ const UserActivity = () => {
             type: "surprised",
             activityId: activity.id
         }
-        await axios.post("http://localhost:1235/api/feedback", feedback);
+        await axios.post("http://localhost:1235/api/feedback", feedback)
+        .then((res) => {
+            console.log(res.status)
+            toast.success("Feedback sent!", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
+          })
+          .catch((er) => {
+            toast.error("Sorry, but there was an error, please try again", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+            console.log(er)
+          });
     }
 
     const handleConfused = async () => {
@@ -56,7 +149,33 @@ const UserActivity = () => {
             type: "confused",
             activityId: activity.id
         }
-        await axios.post("http://localhost:1235/api/feedback", feedback);
+        await axios.post("http://localhost:1235/api/feedback", feedback)
+        .then((res) => {
+            console.log(res.status)
+            toast.success("Feedback sent!", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
+          })
+          .catch((er) => {
+            toast.error("Sorry, but there was an error, please try again", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+            console.log(er)
+          });
     }
 
     return (
@@ -72,6 +191,21 @@ const UserActivity = () => {
                 <div className={styles.cadran} onClick={handleConfused}>🤨</div>
             </div>
             <button className={styles.btn} onClick={goBack}>Go back</button>
+
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
+
+
         </div>
     )
 }

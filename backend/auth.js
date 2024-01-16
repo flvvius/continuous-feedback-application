@@ -16,7 +16,6 @@ passport.use(new Strategy({
             User.create({
                 name: profile.name.givenName + " " + (profile.name.middleName !== undefined ? profile.name.middleName + " " + profile.name.familyName : profile.name.familyName),
                 email: profile.emails[0].value,
-                password: "ceva123",
                 isTeacher: false,
             })
             .then((user) => {

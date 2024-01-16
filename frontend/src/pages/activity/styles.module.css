@@ -2,6 +2,10 @@
     margin: 10px;
 }
 
+.exp {
+    background-color: rgb(187, 71, 71);
+}
+
 button {
     border-radius: 15px;
     display: flex;

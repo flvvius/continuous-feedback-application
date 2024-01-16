@@ -25,10 +25,10 @@ export default function Login() {
 			<div className={styles.form_container}>
 					<button className={styles.google_btn} onClick={(e)=>googleAuth(e)}>
 						<img src="./images/google.png" alt="google icon" />
-						<span>Sing in with Google</span>
+						<span>Sign in with Google</span>
 					</button>
 					<p className={styles.text}>
-						New Here ? <Link to="/signup">Sing Up</Link>
+						New Here ? <Link to="/signup">Sign Up</Link>
 					</p>
 			</div>
 		</div>
