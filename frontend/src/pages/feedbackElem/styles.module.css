@@ -1,0 +1,23 @@
+.container {
+    background-color: rgb(217, 206, 206);
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    width: 250px;
+    /* border: 1px solid red; */
+}
+
+.btn {
+    font-size: 18px;
+    font-weight: 500;
+    padding: 12px 25px;
+    color: white;
+    background-color: #ffc801;
+    border-radius: 12px;
+    /* margin: 10px 0 0 0; */
+    margin-bottom: 20px;
+    margin-top: -10px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
