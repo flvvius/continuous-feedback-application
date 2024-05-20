@@ -39,14 +39,12 @@ const App = () => {
   return (
     <div className="container">
 			<Routes>
-        {/* <Route path='/' element={<ProtectedRoute/>}> */}
         <Route
 					exact
 					path="/home"
 					element={user && user.isTeacher ? ( <HomeAdmin user={user} /> ) : user ? ( <HomeUser user={user}/> ) : <Navigate to="/login" />}
 				/>
 
-        {/* </Route> */}
 				<Route
 					exact
 					path="/login"
